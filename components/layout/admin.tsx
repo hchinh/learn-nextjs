@@ -1,10 +1,11 @@
 import { LayoutProps } from '@/models/index'
 import Link from 'next/link'
 import React from 'react'
+import { Auth } from '../common'
 
 export const AdminLayout = ({ children }: LayoutProps) => {
 	return (
-		<div>
+		<Auth>
 			<div>Admin Layout</div>
 
 			<div>Sidebar</div>
@@ -18,6 +19,6 @@ export const AdminLayout = ({ children }: LayoutProps) => {
 			</Link>
 
 			<div>{children}</div>
-		</div>
+		</Auth>
 	)
 }

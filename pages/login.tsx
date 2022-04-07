@@ -1,29 +1,23 @@
 import { authApi } from '@/api/auth-api'
 import React from 'react'
+import { useAuth } from '@/hooks/index'
 
 const LoginPage = () => {
+	const { profile, login, logout } = useAuth()
+
 	const handleLoginClick = async () => {
 		try {
-			await authApi.login({
-				username: 'test',
-				password: '123456',
-			})
+			await login()
+			console.log('Redirect to dashboard')
 		} catch (error) {
 			console.log('fail to login', error)
 		}
 	}
 
-	const handleGetProfileClick = async () => {
-		try {
-			await authApi.getProfile()
-		} catch (error) {
-			console.log('fail to get profile', error)
-		}
-	}
-
 	const handleLogoutClick = async () => {
 		try {
-			await authApi.logout()
+			await logout()
+			console.log('Redirect to login page')
 		} catch (error) {
 			console.log('fail to logout', error)
 		}
@@ -33,8 +27,9 @@ const LoginPage = () => {
 		<div>
 			<div>Login Page</div>
 
+			<p>Profile: {JSON.stringify(profile || {}, null, 4)}</p>
+
 			<button onClick={handleLoginClick}>Login</button>
-			<button onClick={handleGetProfileClick}>Get Profile</button>
 			<button onClick={handleLogoutClick}>Logout</button>
 		</div>
 	)
